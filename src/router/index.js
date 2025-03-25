@@ -1,25 +1,62 @@
+//导入依赖
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import My from '../views/My.vue'
+import Header from '../components/Header.vue'
 
+//定义路由
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'my',
+    component: My,
+    children: [
+      {
+        path: '/test1',
+        name: 'test1',
+        component: () => import('@/views/Test1.vue')
+      },
+      {
+        path: '/test2',
+        name: 'test2',
+        component: () => import('@/views/Test2.vue')
+      },
+      {
+        path: '/test3',
+        name: 'test3',
+        component: () => import('@/views/Test3.vue')
+      },
+      {
+        path: '/test4',
+        name: 'test4',
+        component: () => import('@/views/Test4.vue')
+      },
+      {
+        path: '/test5',
+        name: 'test5',
+        component: () => import('@/views/Test5.vue')
+      },
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    path: '/header',
+    name: 'header',
+    component: Header
+  },
+  {
+    path: '/footer',
+    name: 'footer',
+    component: () => import('@/components/Footer.vue')
+  },
 
+
+
+]
+//创建路由实例
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 })
-
+//导出路由实例
 export default router
+
+
